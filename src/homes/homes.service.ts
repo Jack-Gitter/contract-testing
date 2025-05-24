@@ -13,7 +13,7 @@ export class HomesService {
     return await this.homesRepository.find();
   }
 
-  public async findHome(street: string, zip: string, city: string) {
+  public async findHome(city: string, street: string, zip: string) {
     const home = await this.homesRepository.findOneBy({
       street,
       city,
@@ -26,7 +26,7 @@ export class HomesService {
     }
   }
 
-  public async reserveHome(street: string, zip: string, city: string) {
+  public async reserveHome(city: string, street: string, zip: string) {
     const home = await this.homesRepository.findOneBy({
       street,
       city,
