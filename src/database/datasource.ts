@@ -2,7 +2,7 @@ import { Home } from '../homes/homes.entity';
 import { DataSource } from 'typeorm';
 import { Init1748110788902 } from './migrations/1748110788902-init';
 
-export const datasource = new DataSource({
+export const dataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5433,
