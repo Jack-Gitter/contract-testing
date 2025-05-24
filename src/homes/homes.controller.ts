@@ -20,7 +20,7 @@ export class HomesController {
     );
   }
 
-  @Post('reserve')
+  @Post('reserve/:city/:street/:zip')
   public async reserveHome(@Param() reserveHomeDto: ReserveHomeDTO) {
     return await this.homesService.reserveHome(
       reserveHomeDto.city,
