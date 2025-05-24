@@ -15,7 +15,8 @@ async function bootstrap() {
     .addTag('homes');
 
   await OpenApiNestFactory.configure(app, config, {
-    fileGeneratorOptions: { enabled: true, outputFilePath: 'api-spec.yaml' },
+    webServerOptions: { enabled: true, path: 'api-docs' },
+    fileGeneratorOptions: { enabled: true, outputFilePath: './openapi.json' },
   });
 
   await app.listen(process.env.PORT ?? 3000);
