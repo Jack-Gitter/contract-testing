@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { HomesService } from './homes.service';
+import { FindHomeDTO } from './homes.dto';
 
 @Controller('homes')
 export class HomesController {
@@ -8,5 +9,14 @@ export class HomesController {
   @Get()
   public async getHomes() {
     return await this.homesService.getHomes();
+  }
+
+  @Get('/:city/:street/:zip')
+  public async findHome(@Param() findHomeDto: FindHomeDTO) {
+    return await this.homesService.findHome(
+      findHomeDto.city,
+      findHomeDto.street,
+      findHomeDto.zip,
+    );
   }
 }

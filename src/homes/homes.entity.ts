@@ -18,14 +18,14 @@ export class Home {
   id: number;
 
   @Column({ type: 'varchar', name: 'street', nullable: false })
-  private street: string;
+  public street: string;
 
   @Column({ type: 'varchar', name: 'city', nullable: false })
-  private city: string;
+  public city: string;
 
   @Column({ type: 'varchar', name: 'zip', nullable: false })
-  private zip: string;
+  public zip: string;
 
   @Column({ type: 'int', name: 'price_per_night', nullable: false })
-  private pricePerNight: number;
+  public pricePerNight: number;
 }
