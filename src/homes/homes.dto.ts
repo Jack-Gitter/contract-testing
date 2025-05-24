@@ -9,6 +9,8 @@ export class FindHomeDTO {
 
   @IsString()
   zip: string;
+
+  static readonly additionalProperties = false;
 }
 
 export class ReserveHomeDTO {
@@ -20,4 +22,6 @@ export class ReserveHomeDTO {
 
   @IsString()
   zip: string;
+
+  static readonly additionalProperties = false;
 }
