@@ -1,5 +1,6 @@
 import { Home } from '../homes/homes.entity';
 import { DataSource } from 'typeorm';
+import { Init1748110788902 } from './migrations/1748110788902-init';
 
 export const datasource = new DataSource({
   type: 'postgres',
@@ -10,5 +11,5 @@ export const datasource = new DataSource({
   database: 'contract_testing',
   migrationsRun: true,
   entities: [Home],
-  migrations: [],
+  migrations: [Init1748110788902],
 });

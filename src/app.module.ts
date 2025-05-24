@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { HomesModule } from './homes/homes.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Init1748110788902 } from './database/migrations/1748110788902-init';
+import { Home } from './homes/homes.entity';
 
 @Module({
   imports: [
@@ -12,8 +14,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: 'postgres',
       database: 'contract_testing',
       migrationsRun: true,
-      entities: [],
-      migrations: ['dist/migrations/*.ts'],
+      entities: [Home],
+      migrations: [Init1748110788902],
     }),
     HomesModule,
   ],
