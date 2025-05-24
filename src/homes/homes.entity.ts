@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Home {
@@ -13,6 +13,9 @@ export class Home {
     this.zip = zip;
     this.pricePerNight = pricePerNight;
   }
+
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: 'varchar', name: 'street', nullable: false })
   private street: string;

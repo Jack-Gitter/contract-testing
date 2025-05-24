@@ -13,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'contract_testing',
       migrationsRun: true,
       entities: [],
+      migrations: ['dist/migrations/*.ts'],
     }),
     HomesModule,
   ],
