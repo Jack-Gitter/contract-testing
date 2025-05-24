@@ -1,0 +1,28 @@
+import { Column, Entity } from 'typeorm';
+
+@Entity()
+export class Home {
+  constructor(
+    street: string,
+    city: string,
+    zip: string,
+    pricePerNight: number,
+  ) {
+    this.street = street;
+    this.city = city;
+    this.zip = zip;
+    this.pricePerNight = pricePerNight;
+  }
+
+  @Column({ type: 'varchar', name: 'street', nullable: false })
+  private street: string;
+
+  @Column({ type: 'varchar', name: 'city', nullable: false })
+  private city: string;
+
+  @Column({ type: 'varchar', name: 'zip', nullable: false })
+  private zip: string;
+
+  @Column({ type: 'int', name: 'price_per_night', nullable: false })
+  private pricePerNight: number;
+}
