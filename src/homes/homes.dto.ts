@@ -10,3 +10,14 @@ export class FindHomeDTO {
   @IsString()
   zip: string;
 }
+
+export class ReserveHomeDTO {
+  @IsString()
+  street: string;
+
+  @IsString()
+  city: string;
+
+  @IsString()
+  zip: string;
+}

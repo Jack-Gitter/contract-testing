@@ -25,4 +25,15 @@ export class HomesService {
       throw new NotFoundException('Home does not exist');
     }
   }
+
+  public async reserveHome(street: string, zip: string, city: string) {
+    const home = await this.homesRepository.findOneBy({
+      street,
+      city,
+      zip,
+    });
+    if (!home) {
+      throw new NotFoundException('Home does not exist');
+    }
+  }
 }

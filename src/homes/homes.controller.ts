@@ -1,6 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { HomesService } from './homes.service';
-import { FindHomeDTO } from './homes.dto';
+import { FindHomeDTO, ReserveHomeDTO } from './homes.dto';
 
 @Controller('homes')
 export class HomesController {
@@ -17,6 +17,15 @@ export class HomesController {
       findHomeDto.city,
       findHomeDto.street,
       findHomeDto.zip,
+    );
+  }
+
+  @Post('reserve')
+  private async reserveHome(@Param() reserveHomeDto: ReserveHomeDTO) {
+    return await this.homesService.reserveHome(
+      reserveHomeDto.city,
+      reserveHomeDto.street,
+      reserveHomeDto.zip,
     );
   }
 }
