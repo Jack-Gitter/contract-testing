@@ -10,3 +10,14 @@
     * set up a database that uses the seed script!
     * set up a prism test container and spin it up for tests!!!
 
+
+
+* blog 
+    * openapi spec and what it is
+    * generating it with nestjs
+    * prism command line static responses
+    * prism dynamic responses and docker container 
+    * test containers and postgres
+    * running migrations on test containers same as app
+    * seeding test containers?
+
