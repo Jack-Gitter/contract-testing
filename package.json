@@ -21,7 +21,7 @@
     "migrations:generate": "npm run build && npx typeorm migration:generate change -d dist/database/datasource.js",
     "migrations:run": "npx typeorm migration:run -d dist/database/datasource.js",
     "seed": "npx ts-node src/database/seed.ts",
-    "mock": "npx prism ./openapi.json"
+    "mock": "npx prism mock ./openapi.json"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
