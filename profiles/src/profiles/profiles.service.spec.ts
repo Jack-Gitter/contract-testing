@@ -1,10 +1,11 @@
 import { Test } from '@nestjs/testing';
 import { ProfilesController } from './profiles.controller';
 import { ProfilesService } from './profiles.service';
-import { execSync } from 'node:child_process';
+import { exec, execSync } from 'node:child_process';
 import { HttpModule, HttpService } from '@nestjs/axios';
 
 describe(ProfilesService.name, () => {
+  jest.setTimeout(60000);
   let profileService: ProfilesService;
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -23,11 +24,12 @@ describe(ProfilesService.name, () => {
 
     profileService = moduleRef.get(ProfilesService);
 
-    execSync('npm run mock:up');
+    exec('npm run mock:up');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   });
 
   afterAll(async () => {
-    execSync('npm run mock:down');
+    exec('npm run mock:down');
   });
 
   describe('Get Profile', () => {
