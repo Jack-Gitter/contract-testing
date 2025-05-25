@@ -1,5 +1,6 @@
 import { dataSource } from './datasource';
 import { Home } from '../homes/homes.entity';
+import { DataSource } from 'typeorm';
 
 // Sample data for generating random homes
 const streets = [
@@ -102,9 +103,11 @@ async function seedHomes(count: number = 10): Promise<void> {
   }
 }
 
-export async function runSeed(): Promise<void> {
+export async function runSeed(dataSource: DataSource): Promise<void> {
   try {
-    await dataSource.initialize();
+    if (!dataSource.isInitialized) {
+      await dataSource.initialize();
+    }
     console.log('Database connection established');
 
     // Check if homes already exist
@@ -130,5 +133,5 @@ export async function runSeed(): Promise<void> {
 
 // Run the seed if this file is executed directly
 if (require.main === module) {
-  runSeed().catch(console.error);
+  runSeed(dataSource).catch(console.error);
 }
