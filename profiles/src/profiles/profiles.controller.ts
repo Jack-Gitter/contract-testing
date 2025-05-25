@@ -1,7 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
 
-@Controller()
+@Controller('profile')
 export class ProfilesController {
   constructor(private profileService: ProfilesService) {}
+
+  @Get('/:id')
+  public async getProfile(@Param('id') id: number) {
+    return await this.profileService.getProfile(id);
+  }
 }
