@@ -9,6 +9,7 @@ const providers: Provider[] = [
     useFactory: (httpService: HttpService) => {
       return new ProfilesService(httpService, 'http://localhost:3001/homes');
     },
+    inject: [HttpService],
   },
 ];
 @Module({

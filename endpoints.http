@@ -1,0 +1,6 @@
+GET http://localhost:3000/homes
+Content-Type: application/json
+
+###
+GET http://localhost:3001/profile/1
+Content-Type: application/json
