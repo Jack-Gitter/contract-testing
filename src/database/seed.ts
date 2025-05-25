@@ -103,15 +103,15 @@ async function seedHomes(count: number = 10): Promise<void> {
   }
 }
 
-export async function runSeed(dataSource: DataSource): Promise<void> {
+export async function runSeed(ds: DataSource): Promise<void> {
   try {
-    if (!dataSource.isInitialized) {
-      await dataSource.initialize();
+    if (!ds.isInitialized) {
+      await ds.initialize();
     }
     console.log('Database connection established');
 
     // Check if homes already exist
-    const homeRepository = dataSource.getRepository(Home);
+    const homeRepository = ds.getRepository(Home);
     const existingCount = await homeRepository.count();
 
     if (existingCount > 0) {
@@ -126,7 +126,7 @@ export async function runSeed(dataSource: DataSource): Promise<void> {
   } catch (error) {
     console.error('Seeding failed:', error);
   } finally {
-    await dataSource.destroy();
+    await ds.destroy();
     console.log('Database connection closed');
   }
 }
