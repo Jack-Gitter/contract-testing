@@ -62,5 +62,9 @@ describe(HomesService.name, () => {
       const homes = await homesService.getHomes();
       expect(homes).toMatchObject([home.toJson()]);
     });
+    it('Recieves empty array back when no data in database', async () => {
+      const homes = await homesService.getHomes();
+      expect(homes).toMatchObject([]);
+    });
   });
 });
