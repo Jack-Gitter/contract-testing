@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -10,8 +10,12 @@ export class ProfilesService {
   ) {}
 
   names = ['someone1', 'someone2', 'someone3', 'someone4'];
+
   public async getProfile(id: number) {
     try {
+      if (id >= this.names.length) {
+        throw new BadRequestException('no users found with that ID');
+      }
       const url = `${this.homesServiceBaseUrl}/homes`;
       const res = await firstValueFrom(this.httpService.get(url));
       const homes: any[] = res.data;
@@ -20,7 +24,7 @@ export class ProfilesService {
       });
 
       return {
-        name: this.names[Math.floor(Math.random() * 3)],
+        name: this.names[id],
         homes: profileHomes,
       };
     } catch (e) {
