@@ -27,8 +27,6 @@ export class ProfilesService {
         name: this.names[id],
         homes: profileHomes,
       };
-    } catch (e) {
-      console.error(e);
-    }
+    } 
   }
 }
