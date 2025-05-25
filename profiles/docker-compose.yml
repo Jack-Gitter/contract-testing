@@ -6,4 +6,4 @@ services:
     volumes:
       - ./homesapi.json:/tmp/homesapi.json:ro
     ports:
-      - '3001:4010'
+      - '8080:4010'
