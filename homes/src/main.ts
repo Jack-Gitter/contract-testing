@@ -6,7 +6,7 @@ import { DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({transform:true}));
 
   const config = new DocumentBuilder()
     .setTitle('Contract Testing')
