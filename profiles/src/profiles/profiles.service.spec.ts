@@ -40,9 +40,15 @@ describe(ProfilesService.name, () => {
       expect(res.homes).not.toBeNull();
     });
     it('properly integrates with the homes service', async () => {
-      await expect(async () => {
-        await profileService.findProfileHome(99999, 'fake', 'fake', 'fake');
-      }).rejects.toThrow(BadRequestException);
+      const res = await profileService.findProfileHome(
+        1,
+        'random',
+        'street',
+        '12345',
+      );
+
+      expect(res.home).not.toBeNull();
+      expect(res.name).not.toBeNull();
     });
   });
 });
