@@ -7,13 +7,16 @@ import {
   StartedPostgreSqlContainer,
 } from '@testcontainers/postgresql';
 import { Init1748110788902 } from '../database/migrations/1748110788902-init';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
+import { runSeed } from '../database/seed';
+import { dataSource } from '../database/datasource';
 
 describe(HomesService.name, () => {
   jest.setTimeout(60000);
   let homesService: HomesService;
   let container: StartedPostgreSqlContainer;
   let homeRepo: Repository<Home>;
+  let datasource: DataSource;
 
   beforeAll(async () => {
     container = await new PostgreSqlContainer()
@@ -49,6 +52,7 @@ describe(HomesService.name, () => {
 
     homesService = moduleRef.get(HomesService);
     homeRepo = moduleRef.get(getRepositoryToken(Home));
+    datasource = moduleRef.get(DataSource);
   });
 
   afterEach(async () => {
@@ -56,6 +60,11 @@ describe(HomesService.name, () => {
   });
 
   describe('Get Homes', () => {
+    it('properly fetches a lot of homes', async () => {
+      await runSeed(datasource);
+      const homes = await homesService.getHomes();
+      expect(homes).toHaveLength(20);
+    });
     it('Fetches homes properly', async () => {
       const home = new Home('Street', 'City', 'Zip', 123);
       await homeRepo.save([home]);

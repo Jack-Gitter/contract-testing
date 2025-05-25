@@ -76,8 +76,8 @@ function generateRandomPrice(): number {
   return Math.floor(Math.random() * 450) + 50;
 }
 
-async function seedHomes(count: number = 10): Promise<void> {
-  const homeRepository = dataSource.getRepository(Home);
+async function seedHomes(ds: DataSource, count: number = 10): Promise<void> {
+  const homeRepository = ds.getRepository(Home);
 
   console.log(`Seeding ${count} homes...`);
 
@@ -123,12 +123,9 @@ export async function runSeed(ds: DataSource): Promise<void> {
     }
 
     // Seed 15 random homes
-    await seedHomes(20);
+    await seedHomes(ds, 20);
   } catch (error) {
     console.error('Seeding failed:', error);
-  } finally {
-    await ds.destroy();
-    console.log('Database connection closed');
   }
 }
 
