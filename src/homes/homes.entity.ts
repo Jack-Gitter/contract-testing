@@ -28,4 +28,14 @@ export class Home {
 
   @Column({ type: 'int', name: 'price_per_night', nullable: false })
   public pricePerNight: number;
+
+  toJson() {
+    return {
+      id: this.id,
+      street: this.street,
+      city: this.city,
+      zip: this.zip,
+      pricePerNight: this.pricePerNight,
+    };
+  }
 }

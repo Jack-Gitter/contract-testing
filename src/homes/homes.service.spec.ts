@@ -1,19 +1,19 @@
 import { Test } from '@nestjs/testing';
 import { HomesService } from './homes.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { Home } from './homes.entity';
 import {
   PostgreSqlContainer,
   StartedPostgreSqlContainer,
 } from '@testcontainers/postgresql';
 import { Init1748110788902 } from '../database/migrations/1748110788902-init';
-import { runSeed } from '../database/seed';
-import { DataSource } from 'typeorm';
+import { Repository } from 'typeorm';
 
 describe(HomesService.name, () => {
   jest.setTimeout(60000);
   let homesService: HomesService;
   let container: StartedPostgreSqlContainer;
+  let homeRepo: Repository<Home>;
 
   beforeAll(async () => {
     container = await new PostgreSqlContainer()
@@ -47,16 +47,20 @@ describe(HomesService.name, () => {
       providers: [HomesService],
     }).compile();
 
-    const datasource = moduleRef.get(DataSource);
-    await runSeed(datasource);
-
     homesService = moduleRef.get(HomesService);
+    homeRepo = moduleRef.get(getRepositoryToken(Home));
+  });
+
+  afterEach(async () => {
+    await homeRepo.deleteAll();
   });
 
   describe('Get Homes', () => {
     it('Fetches homes properly', async () => {
+      const home = new Home('Street', 'City', 'Zip', 123);
+      await homeRepo.save([home]);
       const homes = await homesService.getHomes();
-      expect(homes).toBe(undefined);
+      expect(homes).toMatchObject([home.toJson()]);
     });
   });
 });

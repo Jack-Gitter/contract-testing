@@ -95,6 +95,7 @@ async function seedHomes(count: number = 10): Promise<void> {
   }
 
   try {
+    console.log('here!');
     await homeRepository.save(homes);
     console.log(`Successfully seeded ${count} homes!`);
   } catch (error) {
