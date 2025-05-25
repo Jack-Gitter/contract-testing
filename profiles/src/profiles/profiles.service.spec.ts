@@ -23,11 +23,11 @@ describe(ProfilesService.name, () => {
 
     profileService = moduleRef.get(ProfilesService);
 
-    execSync('npm run mock up');
+    execSync('npm run mock:up');
   });
 
   afterAll(async () => {
-    execSync('npm run mock down');
+    execSync('npm run mock:down');
   });
 
   describe('Get Profile', () => {
