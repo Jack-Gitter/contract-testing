@@ -9,7 +9,6 @@ import {
 import { Init1748110788902 } from '../database/migrations/1748110788902-init';
 import { DataSource, Repository } from 'typeorm';
 import { runSeed } from '../database/seed';
-import { dataSource } from '../database/datasource';
 
 describe(HomesService.name, () => {
   jest.setTimeout(60000);
