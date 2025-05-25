@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { ProfilesController } from './profiles.controller';
 import { ProfilesService } from './profiles.service';
-import { exec, execSync } from 'node:child_process';
+import { exec } from 'node:child_process';
 import { HttpModule, HttpService } from '@nestjs/axios';
 
 describe(ProfilesService.name, () => {
@@ -36,6 +36,7 @@ describe(ProfilesService.name, () => {
     it('properly integrates with the homes service', async () => {
       const res = await profileService.getProfile(1);
       expect(res).not.toBeNull();
+      expect(res.homes).not.toBeNull();
     });
   });
 });
