@@ -37,12 +37,17 @@ export class ProfilesService {
     if (id >= this.names.length) {
       throw new BadRequestException('no users found with that ID');
     }
-    const url = `${this.homesServiceBaseUrl}/homes/${city}/${street}/${zip}`;
-    const res = await firstValueFrom(this.httpService.get(url));
-    const home: any = res.data;
-    return {
-      name: this.names[id],
-      home: home,
-    };
+    try {
+      const url = `${this.homesServiceBaseUrl}/homes/${city}/${street}/${zip}`;
+      const res = await firstValueFrom(this.httpService.get(url));
+      const home: any = res.data;
+      return {
+        name: this.names[id],
+        home: home,
+      };
+    } catch (e) {
+      console.error(e);
+      throw new BadRequestException();
+    }
   }
 }

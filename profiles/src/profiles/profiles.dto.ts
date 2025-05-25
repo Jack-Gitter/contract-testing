@@ -1,7 +1,7 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsNumberString, IsString } from 'class-validator';
 
 export class ProfileHomeDto {
-  @IsNumber()
+  @IsNumberString()
   id: number;
 
   @IsString()
