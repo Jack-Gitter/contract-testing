@@ -3,6 +3,7 @@ import { ProfilesController } from './profiles.controller';
 import { ProfilesService } from './profiles.service';
 import { exec } from 'node:child_process';
 import { HttpModule, HttpService } from '@nestjs/axios';
+import { BadRequestException } from '@nestjs/common';
 
 describe(ProfilesService.name, () => {
   jest.setTimeout(60000);
@@ -37,6 +38,11 @@ describe(ProfilesService.name, () => {
       const res = await profileService.getProfile(1);
       expect(res).not.toBeNull();
       expect(res.homes).not.toBeNull();
+    });
+    it('properly integrates with the homes service', async () => {
+      await expect(async () => {
+        await profileService.findProfileHome(99999, 'fake', 'fake', 'fake');
+      }).rejects.toThrow(BadRequestException);
     });
   });
 });
