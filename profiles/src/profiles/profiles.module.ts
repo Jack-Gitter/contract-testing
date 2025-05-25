@@ -7,7 +7,7 @@ const providers: Provider[] = [
   {
     provide: ProfilesService,
     useFactory: (httpService: HttpService) => {
-      return new ProfilesService(httpService, 'http://localhost:3001/homes');
+      return new ProfilesService(httpService, 'http://localhost:3000');
     },
     inject: [HttpService],
   },
