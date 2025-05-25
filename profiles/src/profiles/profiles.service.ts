@@ -27,4 +27,22 @@ export class ProfilesService {
       homes: profileHomes,
     };
   }
+
+  public async findProfileHome(
+    id: number,
+    city: string,
+    street: string,
+    zip: string,
+  ) {
+    if (id >= this.names.length) {
+      throw new BadRequestException('no users found with that ID');
+    }
+    const url = `${this.homesServiceBaseUrl}/homes/${city}/${street}/${zip}`;
+    const res = await firstValueFrom(this.httpService.get(url));
+    const home: any = res.data;
+    return {
+      name: this.names[id],
+      home: home,
+    };
+  }
 }
