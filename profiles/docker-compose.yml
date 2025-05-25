@@ -2,8 +2,8 @@ services:
   prism:
     profiles: ['prism']
     image: stoplight/prism
-    command: 'mock -d --json-schema-faker-fillProperties=false /tmp/homesapi.json'
+    command: 'mock -d -h 0.0.0.0 --json-schema-faker-fillProperties=false /tmp/homesapi.json'
     volumes:
       - ./homesapi.json:/tmp/homesapi.json:ro
     ports:
-      - '8080:4010'
+      - '4010:4010'
