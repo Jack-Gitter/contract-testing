@@ -9,6 +9,7 @@ export class ProfilesService {
     private homesServiceBaseUrl: string,
   ) {}
 
+  names = ['someone1', 'someone2', 'someone3', 'someone4'];
   public async getProfile(id: number) {
     try {
       const url = `${this.homesServiceBaseUrl}/homes`;
@@ -17,7 +18,11 @@ export class ProfilesService {
       const profileHomes = homes.filter((home) => {
         return home.id === id;
       });
-      return profileHomes;
+
+      return {
+        name: this.names[Math.floor(Math.random() * 3)],
+        homes: profileHomes,
+      };
     } catch (e) {
       console.error(e);
     }
